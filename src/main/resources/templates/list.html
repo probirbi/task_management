@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration user list</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container"><br>
+    <h2 class="text-center">Registration User list</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr class="text-center">
+            <th>Id</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Address</th>
+            <th>Date</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${#lists.isEmpty(users) == true}">
+            <td colspan="2"> No Users Available </td>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">Id</td>
+            <td th:text="${user.firstName}">Firstname</td>
+            <td th:text="${user.lastName}">Lastname</td>
+            <td th:text="${user.address}">Address</td>
+            <td th:text="${user.date}">Date</td>
+            <td th:text="${user.email}">Email</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
