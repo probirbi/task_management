@@ -18,6 +18,6 @@ public class User {
     private String lastName;
     private String password;
     private String address;
-    private String date;
     private String email;
+    private String date;
 }

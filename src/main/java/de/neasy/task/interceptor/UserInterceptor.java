@@ -23,7 +23,7 @@ public class UserInterceptor implements HandlerInterceptor {
             return true;
         }
         System.out.println("HandlerInterceptor");
-        response.sendRedirect("/login");
+        response.sendRedirect("/user/login");
         return false;
     }
 }

@@ -20,7 +20,6 @@ public class UserServiceInterceptorAppConfig implements WebMvcConfigurer {
         registry.addInterceptor(userInterceptor)
                 .addPathPatterns("/user/*")
                 .excludePathPatterns("/user/login")
-                .excludePathPatterns("/user/list")
                 .excludePathPatterns("/user/register");
 
    /*     registry.addInterceptor(new LocaleChangeInterceptor());

@@ -6,15 +6,14 @@ import de.neasy.task.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("user/")
+@RequestMapping("/user/")
 public class UserController {
 
     @Autowired
@@ -36,12 +35,18 @@ public class UserController {
 
             if (user != null) {
                 session.setAttribute("user", user);
-                return "redirect:profile";
+                return "redirect:list";
             } else {
                 return "login";
             }
         }
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logoutPage(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:login";
     }
 
     @GetMapping("/profile")
@@ -71,13 +76,49 @@ public class UserController {
         return "redirect:list";
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String getUserList(Model model) {
 
         List<User> userList = userRepository.findAll();
         model.addAttribute("users", userList);
 
         return "list";
+    }
+
+    @RequestMapping("/edituser/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+
+        User user = userRepository.findById(id);
+        model.addAttribute("user", user);
+
+        return "edit";
+    }
+
+    @PostMapping("/editsave")
+    public String editSave(UserDto userdto) {
+
+        User user = userRepository.findById(userdto.getId());
+
+        user.setId(userdto.getId());
+        user.setFirstName(userdto.getFirstName());
+        user.setLastName(userdto.getLastName());
+        user.setAddress(userdto.getAddress());
+        user.setDate(userdto.getDate());
+        user.setEmail(userdto.getEmail());
+
+        userRepository.save(user);
+
+        return "redirect:list";
+    }
+
+    @GetMapping("/deleteuser/{id}")
+    public String delete(@PathVariable Long id) {
+
+        User user = new User();
+        user.setId(id);
+
+        userRepository.delete(user);
+        return "redirect:/user/list";
     }
 
 }

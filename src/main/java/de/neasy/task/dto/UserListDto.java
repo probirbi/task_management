@@ -15,4 +15,6 @@ public class UserListDto {
 
     public void addAttribute(String users, List<User> all) {
     }
+    //public void deleteUser(User user){this.users.remove(user);}
+
 }
