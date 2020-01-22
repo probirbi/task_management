@@ -4,6 +4,9 @@ import de.neasy.task.dto.UserDto;
 import de.neasy.task.entity.User;
 import de.neasy.task.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,9 +27,17 @@ public class UserRestController {
         user.setDate(userdto.getDate());
         user.setEmail(userdto.getEmail());
 
-        userRepository.save(user);
+        user = userRepository.saveAndFlush(user);
 
         return user;
     }
 
+    @GetMapping("/deleteuser/{id}")
+    public String delete(@PathVariable Long id) {
+
+        User user = userRepository.findById(id);
+        System.out.println("(Service Side) Deleting employee: " + id);
+        userRepository.delete(user);
+        return "deleted: "+id;
+    }
 }

@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
     <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-    <script src="/postrequest.js"></script>
+    <script src="/user/postrequest.js"></script>
+    <script src="/user/jquery.boot.js"></script>
 </head>
 <body>
 <div class="container"><br>
@@ -94,7 +95,7 @@
             <th>Delete</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="tableBody">
         <tr th:if="${#lists.isEmpty(users) == true}">
             <td colspan="2"> No Users Available </td>
         </tr>
@@ -106,26 +107,32 @@
             <td th:text="${user.date}">Date</td>
             <td th:text="${user.email}">Email</td>
             <td class="text-center"><a th:href="${'/user/edituser/' + user.id}" id="popup">Edit</a></td>
-            <td class="text-center"><a th:href="${'/user/deleteuser/' + user.id}">Delete</a></td>
+           <td class="text-center"><a onclick="deleteData()" th:href="${'/user/deleteuser/' + user.id}">Delete</a></td>
+
+                <!--<td>
+                <button onclick="document.getElementById('id01').style.display='block'">Delete</button>
+
+                <div id="id01" class="modal">
+                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                    <form class="modal-content">
+                        <div class="container">
+                            <h1>Delete Account</h1>
+                            <p>Are you sure you want to delete your account?</p>
+
+                            <div class="clearfix">
+                                <button type="button" class="cancelbtn">No</button>
+                                <button type="button" class="deletebtn"><a th:href="${'/user/deleteuser/' + user.id}">Yes</a></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </td>-->
+
         </tr>
+
         </tbody>
     </table>
     </div>
 </div>
-
-<!--<script type="text/javascript">
-    $((function () {
-        $(popup).bgColor;
-    });
- /*  document.getElementById('popup').addEventListener('click',
-       function(){
-           document.querySelector('container').style.display='flex';
-       });
-
-   document.querySelector('btnClick').addEventListener('click',
-       function(){
-           document.querySelector('container').style.display='none';
-       });*/
-</script>-->
 </body>
 </html>
