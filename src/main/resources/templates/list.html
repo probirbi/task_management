@@ -99,7 +99,9 @@
         <tr th:if="${#lists.isEmpty(users) == true}">
             <td colspan="2"> No Users Available </td>
         </tr>
-        <tr th:each="user : ${users}">
+        <tr th:each="user : ${users}"
+            th:id="${'table-row-' + user.id}">
+
             <td th:text="${user.id}">Id</td>
             <td th:text="${user.firstName}">Firstname</td>
             <td th:text="${user.lastName}">Lastname</td>
@@ -107,7 +109,9 @@
             <td th:text="${user.date}">Date</td>
             <td th:text="${user.email}">Email</td>
             <td class="text-center"><a th:href="${'/user/edituser/' + user.id}" id="popup">Edit</a></td>
-           <td class="text-center"><a onclick="deleteData()" th:href="${'/user/deleteuser/' + user.id}">Delete</a></td>
+            <td class="text-center">
+                <button th:onclick="|deleteData(${user.id})|" class="btn btn-danger">Delete</button>
+            </td>
 
                 <!--<td>
                 <button onclick="document.getElementById('id01').style.display='block'">Delete</button>

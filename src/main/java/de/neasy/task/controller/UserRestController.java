@@ -4,9 +4,6 @@ import de.neasy.task.dto.UserDto;
 import de.neasy.task.entity.User;
 import de.neasy.task.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,6 +35,7 @@ public class UserRestController {
         User user = userRepository.findById(id);
         System.out.println("(Service Side) Deleting employee: " + id);
         userRepository.delete(user);
-        return "deleted: "+id;
+
+        return "success";
     }
 }

@@ -1,25 +1,21 @@
-function deleteData(type, id) {
+
+function deleteData(userId) {
     var alert = confirm("Are you want to delete this item ?");
     if (alert) {
-        var host = "";
-        var id = $("#id").val();
-
         $.ajax({
             type: "GET",
-            contentType: "application/json",
-            url: "/user/deleteuser/" + id,
+            url: "/user/deleteuser/" + userId,
             cache: false,
-            data: JSON.stringify(id),
-            dataType: 'json',
+            dataType: 'text',
             success: function (response) {
+                if(response == 'success') {
+                    $('#table-row-' + userId).remove();
 
-                //console.log(response);
-
-                //response.reload(true)
-
-                //$('#tableBody');
+                    $('<span style="color:green">Successfully deleted</span>').insertBefore('#getResultDiv');
+                }
             }
         });
 
     }
+
 }
