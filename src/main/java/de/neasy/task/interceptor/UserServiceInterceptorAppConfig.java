@@ -15,16 +15,14 @@ public class UserServiceInterceptorAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        //registry.addInterceptor(userInterceptor);
-        System.out.println("Intercepter Registry");
         registry.addInterceptor(userInterceptor)
                 .addPathPatterns("/user/*")
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user/register");
 
-   /*     registry.addInterceptor(new LocaleChangeInterceptor());
-        registry.addInterceptor(new ThemeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
-        registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/user/add/**", "/user/profile/**");*/
+        //registry.addInterceptor(new LocaleChangeInterceptor());
+        //registry.addInterceptor(new ThemeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
+        //registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/user/add/**", "/user/profile/**");
     }
 
 }

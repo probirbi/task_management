@@ -19,7 +19,7 @@ public class UserInterceptor implements HandlerInterceptor {
         HttpSession session = attr.getRequest().getSession();
 
         User user = (User) session.getAttribute("user");
-        if(user != null) {
+        if(user != null ) {
             return true;
         }
         System.out.println("HandlerInterceptor");

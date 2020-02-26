@@ -1,5 +1,8 @@
 package de.neasy.task.controller;
 
+import de.neasy.task.dto.TaskDto;
+import de.neasy.task.entity.Task;
+import de.neasy.task.repository.TaskRepository;
 import de.neasy.task.repository.UserRepository;
 import de.neasy.task.dto.UserDto;
 import de.neasy.task.entity.User;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user/")
@@ -27,15 +29,17 @@ public class UserController {
 
     @PostMapping("/login")
     public String loginPost(UserDto userDto, HttpSession session) {
-        System.out.println("LoginPost");
+
         String userEmail = userDto.getEmail();
         String userPassword = userDto.getPassword();
+
         if (userEmail.isEmpty() == false && userPassword.isEmpty() == false) {
             User user = userRepository.findByEmailAndPassword(userEmail, userPassword);
 
             if (user != null) {
                 session.setAttribute("user", user);
                 return "redirect:list";
+                //return "redirect:task";
             } else {
                 return "login";
             }
@@ -111,7 +115,7 @@ public class UserController {
         return "redirect:list";
     }
 
-    @GetMapping("/deleteuser/{id}")
+/*    @GetMapping("/deleteuser/{id}")
     public String delete(@PathVariable Long id) {
 
         User user = new User();
@@ -119,6 +123,6 @@ public class UserController {
 
         userRepository.delete(user);
         return "redirect:/user/list";
-    }
+    }*/
 
 }

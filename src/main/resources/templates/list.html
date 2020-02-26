@@ -11,9 +11,17 @@
     <script src="/user/jquery.boot.js"></script>
 </head>
 <body>
-<div class="container"><br>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+            <!--<button type="button" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-log-out"></span> Log out
+            </button>-->
+
+        <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
+    </nav>
     <h2 class="text-center">Registration User list</h2>
 
+    <ul class="list-group list-group-horizontal">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Add New User
@@ -79,8 +87,11 @@
                 </div>
             </div>
         </div>
-    </div><br>
-
+    </div><br><hr>
+        <button type="button" class="btn btn-primary" onclick="window.location='/user/task/create'">
+            Create Task
+        </button>
+    </ul>
     <div id="getResultDiv">
     <table class="table table-bordered">
         <thead>
@@ -112,26 +123,6 @@
             <td class="text-center">
                 <button th:onclick="|deleteData(${user.id})|" class="btn btn-danger">Delete</button>
             </td>
-
-                <!--<td>
-                <button onclick="document.getElementById('id01').style.display='block'">Delete</button>
-
-                <div id="id01" class="modal">
-                    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                    <form class="modal-content">
-                        <div class="container">
-                            <h1>Delete Account</h1>
-                            <p>Are you sure you want to delete your account?</p>
-
-                            <div class="clearfix">
-                                <button type="button" class="cancelbtn">No</button>
-                                <button type="button" class="deletebtn"><a th:href="${'/user/deleteuser/' + user.id}">Yes</a></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                </td>-->
-
         </tr>
 
         </tbody>

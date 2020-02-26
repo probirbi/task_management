@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assigned List</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="/user/postrequest.js"></script>
+    <script src="/user/jquery.boot.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <div class="align-content-right">
+            <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
+        </div>
+    </nav>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+        <tr class="text-center">
+            <th>Task Id</th>
+            <th>Task Name</th>
+            <th>Task Description</th>
+        </tr>
+        </thead>
+        <tbody id="tableBody">
+        <tr th:each="task : ${lists}"
+            th:id="${'table-row-' + task.id}">
+            <td th:text="${task.id}">Id</td>
+            <td th:text="${task.name}">Name</td>
+            <td th:text="${task.description}">Description</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
