@@ -12,16 +12,21 @@
 <div class="container">
     <nav class="navbar navbar-light bg-light">
         <div>
-        <button type="button" class="btn btn-primary" onclick="window.location='/user/task/assignList'">
-            Assigned Task List
-        </button>
+            <button type="button" class="btn btn-primary" onclick="window.location='/user/task/assignList'">
+                Assigned Task List
+            </button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" onclick="window.location='/user/task/createdTask'">
+                Created Task
+            </button>
         </div>
         <div class="align-content-right">
             <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
         </div>
     </nav>
     <h2 class="text-center">Task Management System.</h2>
-    <div class="align-content-center">
+    <div class="align-top">
         <div class="col-sm-6 bg-primary">
             <form method="post" action="/user/task/save" class="form-control-lg">
 

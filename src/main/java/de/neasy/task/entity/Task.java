@@ -15,4 +15,5 @@ public class Task {
     private String description;
     private long createdById;
     private long assignToId;
+    private String status;
 }

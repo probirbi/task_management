@@ -1,12 +1,10 @@
 package de.neasy.task.controller;
 
-import de.neasy.task.dto.TaskDto;
-import de.neasy.task.entity.Task;
-import de.neasy.task.repository.TaskRepository;
 import de.neasy.task.repository.UserRepository;
 import de.neasy.task.dto.UserDto;
 import de.neasy.task.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +19,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+   // @Autowired
+    //private BCryptPasswordEncoder passwordEncoder;
+
     @GetMapping("/login")
     public String login() {
         System.out.println("Login page");
@@ -33,8 +34,11 @@ public class UserController {
         String userEmail = userDto.getEmail();
         String userPassword = userDto.getPassword();
 
+        String encryptPassword = encryptPassword(userPassword);
+        //String decryptPassword = decryptPassword(userPassword);
+
         if (userEmail.isEmpty() == false && userPassword.isEmpty() == false) {
-            User user = userRepository.findByEmailAndPassword(userEmail, userPassword);
+            User user = userRepository.findByEmailAndPassword(userEmail, encryptPassword);
 
             if (user != null) {
                 session.setAttribute("user", user);
@@ -64,13 +68,56 @@ public class UserController {
         return "register";
     }
 
+    private String encryptPassword(String password) {
+
+        if (password.length() >= 1) {
+
+            String encryptedString = "";
+
+            for (int i = 0; i < password.length(); i++) {
+                char character = password.charAt(i);
+                int ascii = character;
+                ascii--;
+                char convertedCharacter = (char) ascii;
+                encryptedString = encryptedString + convertedCharacter;
+            }
+
+            return encryptedString;
+        }
+
+        return "";
+    }
+
+    private String decryptPassword(String password) {
+
+        if (password.length() >= 1) {
+
+            String decryptedString = "";
+
+            for (int i = 0; i < password.length(); i++) {
+                char character = password.charAt(i);
+                int ascii = character;
+                ascii++;
+                char convertedCharacter = (char) ascii;
+                decryptedString = decryptedString + convertedCharacter;
+            }
+
+            return decryptedString;
+        }
+
+        return "";
+    }
+
     @PostMapping("/register")
-    public String saveData(UserDto userdto) {
+    public String saveData(UserDto userdto){
 
         User user = new User();
         user.setFirstName(userdto.getFirstName());
         user.setLastName(userdto.getLastName());
-        user.setPassword(userdto.getPassword());
+
+        String encryptedPassword = encryptPassword(userdto.getPassword());
+
+        user.setPassword(encryptedPassword);
         user.setAddress(userdto.getAddress());
         user.setDate(userdto.getDate());
         user.setEmail(userdto.getEmail());
@@ -114,15 +161,5 @@ public class UserController {
 
         return "redirect:list";
     }
-
-/*    @GetMapping("/deleteuser/{id}")
-    public String delete(@PathVariable Long id) {
-
-        User user = new User();
-        user.setId(id);
-
-        userRepository.delete(user);
-        return "redirect:/user/list";
-    }*/
 
 }

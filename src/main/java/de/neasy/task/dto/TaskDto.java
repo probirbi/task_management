@@ -9,5 +9,6 @@ public class TaskDto {
     private String name;
     private long createdById;
     private long assignToId;
+    private String status;
 }
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Assigned List</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script src="/js/jquery.js" th:src="@{/js/jquery.js}" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+    <script src="/task/post.taskstatus.js"></script>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+    <div class="align-content-right">
+        <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
+    </div>
+</nav>
+
+
+    <!--<div class="col-lg-6 m-auto d-block">-->
+    <div>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-center">
+                <th>Task Id</th>
+                <th>Task Name</th>
+                <th>Task Description</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="tableBody">
+            <tr th:each="task : ${lists}"
+                th:id="${'table-row-' + task.id}">
+                <td th:text="${task.id}">Id</td>
+                <td th:text="${task.name}">Name</td>
+                <td th:text="${task.description}">Description</td>
+                <!--<td th:text="${task.status}">Status</td>-->
+                <td>
+
+                    <div>
+                        <select th:onchange="|changeStatus(${task.id}, this)|">
+                            <option th:selected="${#strings.equals(task.status, 'open')}" value="open">Open</option>
+                            <option th:selected="${#strings.equals(task.status, 'not-start')}" value="not-start">Not Start</option>
+                            <option th:selected="${#strings.equals(task.status, 'in-progress')}" value="in-progress">In Progress</option>
+                            <option th:selected="${#strings.equals(task.status, 'testing')}" value="testing">Testing</option>
+                            <option th:selected="${#strings.equals(task.status, 'done')}" value="done">Done</option>
+                        </select>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
