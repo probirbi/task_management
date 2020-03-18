@@ -7,9 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -19,7 +28,7 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-   // @Autowired
+    // @Autowired
     //private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
@@ -109,7 +118,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String saveData(UserDto userdto){
+    public String saveData(UserDto userdto) {
+
+        MultipartFile picture = userdto.getProfilepicture();
+        String pathDirectory = "./static" + File.separator + StringUtils.cleanPath(picture.getOriginalFilename());
+        try {
+            Path copyLocation = Paths.get(pathDirectory);
+            Files.copy(picture.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception ex) {
+
+        }
 
         User user = new User();
         user.setFirstName(userdto.getFirstName());
@@ -121,6 +139,7 @@ public class UserController {
         user.setAddress(userdto.getAddress());
         user.setDate(userdto.getDate());
         user.setEmail(userdto.getEmail());
+        user.setFilePath(pathDirectory);
 
         userRepository.save(user);
 

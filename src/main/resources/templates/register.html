@@ -14,18 +14,21 @@
 <div id="postResultDiv" align="center"></div>
 <div class="container"><br>
     <h1 class="text-success text-center">Registration page</h1><br>
-    <div class="col-lg-6 m-auto d-block">fweff</div>
-        <div class="col-lg-6 m-auto d-block">
-        <!-- action="/user/register" -->
-        <form method="post" id="registration_form" class="bg-light">
+    <div class="col-lg-6 m-auto d-block">
+
+        <form method="post" enctype="multipart/form-data"
+              id="registration_form" action="/user/register" class="bg-light">
+
             <div class="form-group">
                 <label for="form_fname">First Name:</label>
-                <input type="text" class="form-control" id="form_fname" name="firstName" placeholder="First Name" autocomplete="off">
+                <input type="text" class="form-control" id="form_fname" name="firstName" placeholder="First Name"
+                       autocomplete="off">
                 <span class="text-danger font-weight-normal font-italic" id="fname_error_message"></span>
             </div>
             <div class="form-group">
                 <label for="form_lname">Last Name:</label>
-                <input type="text" class="form-control" id="form_lname" name="lastName" placeholder="Last Name" autocomplete="off">
+                <input type="text" class="form-control" id="form_lname" name="lastName" placeholder="Last Name"
+                       autocomplete="off">
                 <span class="text-danger font-weight-normal font-italic" id="lname_error_message"></span>
             </div>
             <div class="form-group">
@@ -35,13 +38,15 @@
             </div>
             <div class="form-group">
                 <label for="form_conpass">Confirm Password:</label>
-                <input type="password" class="form-control" id="form_conpass" name="confirmPassword" autocomplete="off"/>
+                <input type="password" class="form-control" id="form_conpass" name="confirmPassword"
+                       autocomplete="off"/>
                 <span class="text-danger font-weight-normal font-italic" id="conpass_error_message"></span>
             </div>
 
             <div class="form-group">
                 <label>Address:</label>
-                <input type="text" id="form_street" class="form-control" name="address" placeholder="House address - 29">
+                <input type="text" id="form_street" class="form-control" name="address"
+                       placeholder="House address - 29">
                 <span class="text-danger font-weight-normal font-italic" id="street_error_message"></span>
             </div>
 
@@ -52,10 +57,14 @@
             </div>
             <div class="form-group">
                 <label for="form_email">Email address:</label>
-                <input type="email" class="form-control" name="email" placeholder="Example: biswas@neasy.de" id="form_email"
+                <input type="email" class="form-control" name="email" placeholder="Example: biswas@neasy.de"
+                       id="form_email"
                        autocomplete="off"/>
                 <span class="text-danger font-weight-normal font-italic" id="email_error_message"></span>
-            </div>
+            </div><br><br>
+            <div class="img-fluid">
+                <input type="file" name="profilepicture" id="image">
+            </div><br><br>
             <div class="form-group">
                 <input type="submit" class="btn btn-success" value="register"/>
             </div>
@@ -130,7 +139,10 @@
 
             function check_pass() {
                 var password_length = $("#form_pass").val().length;
-                if (password_length < 8) {Registration; User; list;
+                if (password_length < 8) {
+                    Registration;
+                    User;
+                    list;
                     $("#pass_error_message").html("Atleast 8 Characters");
                     $("#pass_error_message").show();
                     $("#form_pass").css("border-bottom", "2px solid #F90A0A");
