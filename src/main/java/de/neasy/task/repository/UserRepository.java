@@ -8,15 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmailAndPassword(String email, String password);
-    //User deleteInBatch(Long id);
-
-    void deleteById(Long integer);
-
+    //User findPagedResultByUserElseId(long Id, int offset, int limit);
     User findById(Long id);
-    //User findByFileNameAndFileType(String fileName, String fileType);
-    //User store(MultipartFile file);
-    //User getOne(Long id);
-
-    //void update(User user);
 }
 

@@ -12,6 +12,9 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
     private String name;
+    private String firstName;
+    private String lastName;
+    //private String assignToFullName;
     private String description;
     private long createdById;
     private long assignToId;

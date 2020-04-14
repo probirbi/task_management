@@ -1,9 +1,12 @@
+$(document).ready(function () {
+    $('.status-select').select2();
+});
+
 function changeStatus(taskId, obj) {
     let data = {
         id: taskId,
         status: $(obj).val()
     };
-
     $.ajax({
         type: "POST",
         contentType: "application/json",
@@ -13,5 +16,7 @@ function changeStatus(taskId, obj) {
         success: function (success) {
             alert("Your Success Message here." +success);
         }
-    });
+    })
 }
+
+

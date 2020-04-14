@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.List;
+import javax.persistence.Id;
 
 @Data
 @Entity
@@ -19,4 +20,9 @@ public class User {
     private String email;
     private String date;
     private String filePath;
+
+  /*  @Override
+    public String toString() {
+        return String.format("User[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+    }*/
 }

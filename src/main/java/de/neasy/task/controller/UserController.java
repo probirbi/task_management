@@ -13,8 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,6 +25,7 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+   // private final Path rootLocation = Paths.get("./static");
 
     // @Autowired
     //private BCryptPasswordEncoder passwordEncoder;
@@ -121,7 +120,9 @@ public class UserController {
     public String saveData(UserDto userdto) {
 
         MultipartFile picture = userdto.getProfilepicture();
-        String pathDirectory = "./static" + File.separator + StringUtils.cleanPath(picture.getOriginalFilename());
+        String fileNewName = File.separator + System.currentTimeMillis() + StringUtils.cleanPath(picture.getOriginalFilename());
+        String pathDirectory = "." + File.separator + "static" + fileNewName;
+
         try {
             Path copyLocation = Paths.get(pathDirectory);
             Files.copy(picture.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
@@ -139,10 +140,9 @@ public class UserController {
         user.setAddress(userdto.getAddress());
         user.setDate(userdto.getDate());
         user.setEmail(userdto.getEmail());
-        user.setFilePath(pathDirectory);
+        user.setFilePath(fileNewName);
 
         userRepository.save(user);
-
         return "redirect:list";
     }
 
@@ -152,7 +152,7 @@ public class UserController {
         List<User> userList = userRepository.findAll();
         model.addAttribute("users", userList);
 
-        return "list";
+        return "user/list";
     }
 
     @RequestMapping("/edituser/{id}")
@@ -161,13 +161,47 @@ public class UserController {
         User user = userRepository.findById(id);
         model.addAttribute("user", user);
 
-        return "edit";
+        return "user/edit";
     }
+
+    /*public String imageUpload(String a){
+        UserDto userDto=new UserDto();
+        MultipartFile picture=userDto.getProfilepicture();
+        String fileNewName = File.separator + System.currentTimeMillis() + StringUtils.cleanPath(picture.getOriginalFilename());
+        String pathDirectory = "." + File.separator + "static" + fileNewName;
+
+        try {
+            Path copyLocation = Paths.get(pathDirectory);
+            Files.copy(picture.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception ex) {
+
+        }
+        return "";
+    }*/
 
     @PostMapping("/editsave")
     public String editSave(UserDto userdto) {
 
+        MultipartFile picture = userdto.getProfilepicture();
+        String fileNewName = File.separator + System.currentTimeMillis() + StringUtils.cleanPath(picture.getOriginalFilename());
+        String pathDirectory = "." + File.separator + "static" + fileNewName;
+
+        try {
+            Path copyLocation = Paths.get(pathDirectory);
+            Files.copy(picture.getInputStream(), copyLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception ex) {
+
+        }
+
         User user = userRepository.findById(userdto.getId());
+
+        try {
+            String realDirectory = "." + File.separator + "static" + user.getFilePath();
+            File file = new File(realDirectory);
+            file.delete();
+        } catch (Exception ex) {
+
+        }
 
         user.setId(userdto.getId());
         user.setFirstName(userdto.getFirstName());
@@ -175,10 +209,12 @@ public class UserController {
         user.setAddress(userdto.getAddress());
         user.setDate(userdto.getDate());
         user.setEmail(userdto.getEmail());
+        user.setFilePath(fileNewName);
 
         userRepository.save(user);
 
         return "redirect:list";
     }
+
 
 }

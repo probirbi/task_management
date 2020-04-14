@@ -4,30 +4,28 @@
     <title>Create Task</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-    <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<header th:insert="fragments/general.html :: header"></header>
+<!--<nav class="navbar navbar-light bg-light">
+    <div>
+        <button type="button" class="btn btn-primary" onclick="window.location='/user/task/assignList'">
+            Assigned Task List
+        </button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-primary" onclick="window.location='/user/task/createdTask'">
+            Created Task
+        </button>
+    </div>
+    <div class="align-content-right">
+        <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
+    </div>
+</nav>-->
 <div class="container">
-    <nav class="navbar navbar-light bg-light">
-        <div>
-            <button type="button" class="btn btn-primary" onclick="window.location='/user/task/assignList'">
-                Assigned Task List
-            </button>
-        </div>
-        <div>
-            <button type="button" class="btn btn-primary" onclick="window.location='/user/task/createdTask'">
-                Created Task
-            </button>
-        </div>
-        <div class="align-content-right">
-            <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
-        </div>
-    </nav>
-    <h2 class="text-center">Task Management System.</h2>
-    <div class="align-top">
-        <div class="col-sm-6 bg-primary">
+    <br>
+    <h2 class="text-center">Create New Task</h2>
+        <div class="col-sm-6">
             <form method="post" action="/user/task/save" class="form-control-lg">
 
                 <br><br>
@@ -57,7 +55,14 @@
                 <button type="submit" class="btn btn-primary">Create Task</button>
             </form>
         </div>
-    </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#assignToId').select2();
+    });
+</script>
+<br><br>
+<!--<div th:replace="fragments/general.html :: footer"></div>-->
+<br>
 </body>
 </html>

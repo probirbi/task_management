@@ -42,6 +42,7 @@ public class TaskController {
         task.setDescription(taskDto.getDescription());
         task.setCreatedById(loggedInUser.getId());
         task.setAssignToId(taskDto.getAssignToId());
+        //task.setFirstName(taskDto.);
 
         taskRepository.save(task);
 

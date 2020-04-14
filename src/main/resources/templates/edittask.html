@@ -4,17 +4,14 @@
     <title>Created Task list</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-    <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-    <script src="/user/postrequest.js"></script>
-    <script src="/task/jquery.boot.js"></script>
 </head>
 <body>
+<header th:insert="fragments/general.html :: header"></header>
 <div class="container">
-    <nav class="navbar navbar-light bg-light">
+    <!--<nav class="navbar navbar-light bg-light">
         <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
-    </nav>
+    </nav>-->
+    <br>
     <h2 class="text-center">Update Task list</h2>
     <div class="col-lg-6 m-auto d-block">
         <form action="/user/task/editsave" method="post" th:id="task" class="bg-light">
@@ -67,5 +64,7 @@
         </table>
     </div>-->
 </div>
+<br>
+<div th:replace="fragments/general.html :: footer"></div><br>
 </body>
 </html>

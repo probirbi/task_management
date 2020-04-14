@@ -5,25 +5,31 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/DataTables/datatables.css}"/>
+
     <script type="text/javascript" src="/js/jquery.js" th:src="@{/js/jquery.js}"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="/js/jquery.js" th:src="@{/DataTables/datatables.js}"></script>
     <script src="/user/postrequest.js"></script>
     <script src="/task/jquery.boot.js"></script>
 </head>
 <body>
+<header th:insert="fragments/general.html :: header"></header>
 <div class="container">
-    <nav class="navbar navbar-light bg-light">
+    <!--<nav class="navbar navbar-light bg-light">
         <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
-    </nav>
+    </nav>-->
+    <br>
     <h2 class="text-center">Created Task list</h2>
 
     <div id="getResultDiv">
-        <table class="table table-bordered">
+        <table class="table table-bordered" id="myCreatedTaskTable">
             <thead>
             <tr class="text-center">
                 <th>Task Id</th>
                 <th>Task Name</th>
                 <th>Task Description</th>
+                <th>Assign To</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -38,6 +44,8 @@
                 <td th:text="${task.id}">Id</td>
                 <td th:text="${task.name}">Name</td>
                 <td th:text="${task.description}">Description</td>
+                <td th:text="${task.assignToId}">AssignTo</td>
+
                 <td class="text-center"><a th:href="${'/user/task/edit/' + task.id}" id="popup">Edit</a></td>
                 <td class="text-center">
                     <button th:onclick="|deleteData(${task.id})|" class="btn btn-danger">Delete</button>
@@ -47,5 +55,12 @@
         </table>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myCreatedTaskTable').DataTable();
+    });
+</script>
+<br>
+<div th:replace="fragments/general.html :: footer"></div><br>
 </body>
 </html>
