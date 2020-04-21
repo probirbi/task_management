@@ -69,8 +69,7 @@ public class TaskController {
 
         taskRepository.save(task);
 
-        return "redirect:createdtask";
-        //return "redirect:createdTask";
+        return "redirect:createdTask";
     }
 
     @GetMapping("/createdTask")

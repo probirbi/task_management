@@ -15,11 +15,12 @@ public class WriteDataToCSV {
                         .withHeader("Id", "FirstName", "LastName", "Address", "Email", "Date"));
         ) {
             for (User user : users) {
-                long id=user.getId();
-                String s=Long.toString(id);
+                /*long id=user.getId();
+                String s=Long.toString(id);*/
                 List<String> data = Arrays.asList(
-                        s,
+                        //s,
                         //user.getId().toString(),
+                        user.getId() + "",
                         user.getFirstName(),
                         user.getLastName(),
                         user.getAddress(),

@@ -22,9 +22,9 @@
 
 
 <div class="container">
-   <!-- <nav class="navbar navbar-light bg-light">
-        <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
-    </nav>-->
+    <!-- <nav class="navbar navbar-light bg-light">
+         <a class="btn btn-danger btn-sm" href="/user/logout">Sign Out</a>
+     </nav>-->
     <br>
     <h2 class="text-center">Registration User list</h2>
 
@@ -156,10 +156,12 @@
         </table>
     </div>
     <div>
-        <button type="button" class="btn-warning"><a href="http://localhost:8080/user/download/users.csv">Export Call User</a></button>
+        <button type="button" class="btn-warning">Export Call User</a></button>
     </div>
+    <br>
     <div>
-        <a href="http://localhost:8080/user/download/users.csv">Download Users .CSV file</a>
+        <a href="http://localhost:8080/user/download/users.csv"><img th:src="@{/images/excel.png}" style="width: 80px"></a>
+        <a href="http://localhost:8080/user/api/pdf"><img th:src="@{/images/pdf-icon.png}" style="width: 80px"></a>
     </div>
     <br>
     <!--linkdin-->
@@ -168,12 +170,13 @@
             alt="LinkedIn Add to Profile button"></a></div>
     <br>
 </div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
-    </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
 <br>
-<div th:replace="fragments/general.html :: footer"></div><br>
+<div th:replace="fragments/general.html :: footer"></div>
+<br>
 </body>
 </html>

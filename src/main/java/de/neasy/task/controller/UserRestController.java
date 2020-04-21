@@ -1,19 +1,23 @@
 package de.neasy.task.controller;
 
-import de.neasy.task.dto.TaskDto;
 import de.neasy.task.dto.UserDto;
 import de.neasy.task.entity.Task;
 import de.neasy.task.entity.User;
 import de.neasy.task.repository.UserRepository;
 import de.neasy.task.repository.TaskRepository;
+import de.neasy.task.util.PDFGenerator;
 import de.neasy.task.util.WriteDataToCSV;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -90,4 +94,30 @@ public class UserRestController {
         List<User> userList = userRepository.findAll();
         WriteDataToCSV.writeObjectToCSV(response.getWriter(), userList);
     }
+
+    /*@GetMapping("/download/users.pdf")
+    public void downloadPdf(HttpServletResponse response) throws IOException
+
+    {
+        response.setContentType("text/csv");
+        response.setHeader("Content-Disposition", "attachment; file=users.csv");
+
+        List<User> userList = userRepository.findAll();
+        WriteDataToPDF.writeObjectToPDF(response.getWriter(), userList);
+    }*/
+
+    @GetMapping("/api/pdf")
+    public ResponseEntity<InputStreamResource> createPdf() throws IOException{
+        List<User> userList=userRepository.findAll();
+        ByteArrayInputStream byteArrayInputStream= PDFGenerator.userPDFReport(userList);
+
+        HttpHeaders headers=new HttpHeaders();
+        headers.add("Content-Dispossition", "inline; filename=users.pdf");
+        return ResponseEntity
+                .ok()
+                .headers(headers )
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(byteArrayInputStream));
+    }
+
 }
