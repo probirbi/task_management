@@ -21,6 +21,7 @@
                 <th>Task Id</th>
                 <th>Task Name</th>
                 <th>Task Description</th>
+                <th>CreatedBy</th>
                 <th>Assign To</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -36,7 +37,8 @@
                 <td th:text="${task.id}">Id</td>
                 <td th:text="${task.name}">Name</td>
                 <td th:text="${task.description}">Description</td>
-                <td th:text="${task.assignToId}">AssignTo</td>
+                <td th:text="${task.createdBy.firstName +' '+task.createdBy.lastName}">CreatedBy</td>
+                <td th:text="${task.assignTo.firstName +' '+ task.assignTo.lastName}">AssignTo</td>
 
                 <td class="text-center"><a th:href="${'/user/task/edit/' + task.id}" id="popup">Edit</a></td>
                 <td class="text-center">

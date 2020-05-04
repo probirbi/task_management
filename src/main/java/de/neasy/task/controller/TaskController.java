@@ -37,12 +37,15 @@ public class TaskController {
 
         User loggedInUser = (User) httpSession.getAttribute("user");
 
+        User createdByUserObj = userRepository.findById(loggedInUser.getId());
+        User assignedToUserObject = userRepository.findById(taskDto.getAssignToId());;
+
         Task task = new Task();
         task.setName(taskDto.getName());
         task.setDescription(taskDto.getDescription());
-        task.setCreatedById(loggedInUser.getId());
-        task.setAssignToId(taskDto.getAssignToId());
-        //task.setFirstName(taskDto.);
+
+        task.setCreatedBy(createdByUserObj);
+        task.setAssignTo(assignedToUserObject);
 
         taskRepository.save(task);
 
@@ -76,7 +79,9 @@ public class TaskController {
     public String createdTask(Model model, HttpSession httpSession) {
 
         User loggedInUser = (User) httpSession.getAttribute("user");
+        //List<Task> createdTaskList = taskRepository.getAllByCreatedById(loggedInUser.getId());
         List<Task> createdTaskList = taskRepository.getAllByCreatedById(loggedInUser.getId());
+
         model.addAttribute("lists", createdTaskList);
         return "createdtask";
     }
@@ -85,8 +90,8 @@ public class TaskController {
     public String assignList(Model model, HttpSession httpSession) {
         User loggedInUser = (User) httpSession.getAttribute("user");
         List<Task> assignList = taskRepository.getAllByAssignToId(loggedInUser.getId());
+
         model.addAttribute("lists", assignList);
-        //System.out.println("ShowList"+assignList);
         return "assignlist";
     }
 
@@ -94,7 +99,7 @@ public class TaskController {
     @ResponseBody
     public String taskStatus(@RequestBody TaskDto taskDto) {
 
-        Task task=taskRepository.findById(taskDto.getId());
+        Task task = taskRepository.findById(taskDto.getId());
         task.setStatus(taskDto.getStatus());
         taskRepository.save(task);
 

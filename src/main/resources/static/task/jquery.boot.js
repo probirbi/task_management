@@ -1,10 +1,10 @@
 
-function deleteData(taskId) {
+function deleteData(id) {
     var alert = confirm("Are you want to delete this item ?");
     if (alert) {
         $.ajax({
             type: "GET",
-            url: "/user/deletetask/" + taskId,
+            url: "/user/deletetask/" + id,
             cache: false,
             dataType: 'text',
             success: function (response) {

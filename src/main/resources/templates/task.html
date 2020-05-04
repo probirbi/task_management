@@ -25,36 +25,39 @@
 <div class="container">
     <br>
     <h2 class="text-center">Create New Task</h2>
-        <div class="col-sm-6">
-            <form method="post" action="/user/task/save" class="form-control-lg">
+    <div class="col-sm-6">
+        <form method="post" action="/user/task/save" class="form-control-lg">
 
-                <br><br>
+            <br><br>
+            <div class="form-group">
+                <label for="name">Task Name:</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter task name" id="name">
+            </div>
+            <div class="form-group">
+                <label for="description">Task Description:</label>
+                <textarea class="form-control" rows="5" name="description"
+                          placeholder="Enter task description ..." id="description"></textarea>
+            </div>
+
+            <div class="col-sm-6 bg-info">
                 <div class="form-group">
-                    <label for="name">Task Name:</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter task name" id="name">
-                </div>
-                <div class="form-group">
-                    <label for="description">Task Description:</label>
-                    <textarea class="form-control" rows="5" name="description"
-                              placeholder="Enter task description ..." id="description"></textarea>
-                </div>
+                    <label class="control-label">Assign To:</label>
 
-                <div class="col-sm-6 bg-info">
-                    <div class="form-group">
-                        <label class="control-label">Assign To:</label>
-
-                        <select class="form-control" id="assignToId" name="assignToId">
-                            <option th:each="user : ${users}"
-                                    th:value="${user.id}"
-                                    th:text="${user.firstName + ' ' + user.lastName}">asdasd
-                            </option>
-                        </select>
-                    </div>
+                    <select class="form-control" id="assignToId" name="assignToId">
+                        <option th:each="user : ${users}"
+                                th:value="${user.id}"
+                                th:text="${user.firstName + ' ' + user.lastName}">Probir
+                        </option>
+                      <!--<option th:each="user : ${users}"
+                                th:value="${user.firstName + ' ' + user.lastName}">Probir
+                        </option>-->
+                    </select>
                 </div>
+            </div>
 
-                <button type="submit" class="btn btn-primary">Create Task</button>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-primary">Create Task</button>
+        </form>
+    </div>
 </div>
 <script>
     $(document).ready(function () {

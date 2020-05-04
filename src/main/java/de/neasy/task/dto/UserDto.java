@@ -1,18 +1,13 @@
 package de.neasy.task.dto;
 
+import de.neasy.task.entity.Task;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class UserDto {
     private long id;
     private String firstName;
@@ -22,4 +17,11 @@ public class UserDto {
     private String date;
     private String email;
     private MultipartFile profilepicture;
+
+    public UserDto(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    //private Task tasks;
 }

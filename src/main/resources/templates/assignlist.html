@@ -33,7 +33,7 @@
                 <td th:text="${task.id}">Id</td>
                 <td th:text="${task.name}">Name</td>
                 <td th:text="${task.description}">Description</td>
-                <td th:text="${task.createdById}">Created By</td>
+                <td th:text="${task.createdBy.firstName+' '+task.createdBy.lastName}">Created By</td>
                 <!--<td th:text="${task.status}">Status</td>-->
                 <td>
                     <div>
