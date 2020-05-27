@@ -95,17 +95,6 @@ public class UserRestController {
         WriteDataToCSV.writeObjectToCSV(response.getWriter(), userList);
     }
 
-    /*@GetMapping("/download/users.pdf")
-    public void downloadPdf(HttpServletResponse response) throws IOException
-
-    {
-        response.setContentType("text/csv");
-        response.setHeader("Content-Disposition", "attachment; file=users.csv");
-
-        List<User> userList = userRepository.findAll();
-        WriteDataToPDF.writeObjectToPDF(response.getWriter(), userList);
-    }*/
-
     @GetMapping("/api/pdf")
     public ResponseEntity<InputStreamResource> createPdf() throws IOException{
         List<User> userList=userRepository.findAll();

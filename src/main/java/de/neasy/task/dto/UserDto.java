@@ -17,11 +17,4 @@ public class UserDto {
     private String date;
     private String email;
     private MultipartFile profilepicture;
-
-    public UserDto(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    //private Task tasks;
 }

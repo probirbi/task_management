@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +21,7 @@ public class Task {
     private String name;
     private String description;
 
+    /*Created relational database, createdBy and assignTo*/
     @OneToOne
     private User createdBy;
 
@@ -28,5 +29,4 @@ public class Task {
     private User assignTo;
 
     private String status;
-
 }
